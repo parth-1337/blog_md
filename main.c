@@ -5,7 +5,7 @@
 #include <cmark-gfm-core-extensions.h>
 
 int main() {
-    FILE *fp = fopen("mod5.md", "r");
+    FILE *fp = fopen("README.md", "r");
     fseek(fp, 0, SEEK_END);
     long fsize = ftell(fp);
     fseek(fp, 0, SEEK_SET);

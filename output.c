@@ -1,4 +1,5 @@
 #include "output.h"
+#include "style.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,12 +30,26 @@ void gen_file() {
     cmark_llist *exts = cmark_parser_get_syntax_extensions(parser);
     char *html_body = cmark_render_html(document, CMARK_OPT_DEFAULT, exts);
 
+    const char *css = get_css();
+
     FILE *out = fopen("index.html", "w");
+    if (out == NULL) {
+        perror("Error opening index.html for writing");
+        return; 
+    }
     
     fprintf(out, "<!DOCTYPE html>\n<html>\n<head>\n");
     fprintf(out, "<meta charset=\"UTF-8\">\n");
-    fprintf(out, "<title>My Dev Blog</title>\n");
-    fprintf(out, "<link rel=\"stylesheet\" href=\"style.css\">\n");
+
+    // add custom user input title later 
+    
+    fprintf(out, "<title>My Blog</title>\n");
+    
+   
+    // toddo-- add dark light theme later custom
+
+    fprintf(out, "<style>\n%s\n</style>\n", css);
+    
     fprintf(out, "</head>\n<body>\n");
     
     fprintf(out, "%s", html_body);

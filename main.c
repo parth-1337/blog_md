@@ -5,8 +5,9 @@
 #include <cmark-gfm.h>
 #include <cmark-gfm-core-extensions.h>
 
+
 int main() {
-    
+
     gen_file();
 
     return 0;

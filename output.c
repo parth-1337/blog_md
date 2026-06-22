@@ -6,7 +6,7 @@
 #include <cmark-gfm.h>
 #include <cmark-gfm-core-extensions.h>
 
-void gen_file() {
+void gen_file(int is_Dark) {
 
     FILE *fp = fopen("ssg.md", "r");
     fseek(fp, 0, SEEK_END);
@@ -30,7 +30,7 @@ void gen_file() {
     cmark_llist *exts = cmark_parser_get_syntax_extensions(parser);
     char *html_body = cmark_render_html(document, CMARK_OPT_DEFAULT, exts);
 
-    const char *css = get_css();
+    
 
     FILE *out = fopen("index.html", "w");
     if (out == NULL) {
@@ -45,12 +45,20 @@ void gen_file() {
     
     fprintf(out, "<title>My Blog</title>\n");
     
-   
-    // toddo-- add dark light theme later custom
 
-    fprintf(out, "<style>\n%s\n</style>\n", css);
+    fprintf(out, "<style>\n");
+
+    // two themes for now
     
-    fprintf(out, "</head>\n<body>\n");
+    if (is_Dark == 1) {
+        fprintf(out, "%s", dark_theme);
+    } else {
+        fprintf(out, "%s", light_theme);
+    }
+    
+    fprintf(out, "%s", base_css);
+    
+    fprintf(out, "\n</style>\n</head>\n<body>\n");
     
     fprintf(out, "%s", html_body);
     

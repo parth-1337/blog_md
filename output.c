@@ -6,9 +6,17 @@
 #include <cmark-gfm.h>
 #include <cmark-gfm-core-extensions.h>
 
-void gen_file(int is_Dark) {
 
-    FILE *fp = fopen("ssg.md", "r");
+void gen_file(int is_Dark , char* file) {
+
+    
+    FILE *fp = fopen(file, "r");
+
+    if (fp == NULL){
+        perror("File doesnt exist");
+        return ;
+    }
+
     fseek(fp, 0, SEEK_END);
     long fsize = ftell(fp);
     fseek(fp, 0, SEEK_SET);
@@ -49,7 +57,7 @@ void gen_file(int is_Dark) {
     fprintf(out, "<style>\n");
 
     // two themes for now
-    
+
     if (is_Dark == 1) {
         fprintf(out, "%s", dark_theme);
     } else {
@@ -69,5 +77,6 @@ void gen_file(int is_Dark) {
     free(html_body);
     cmark_parser_free(parser);
     cmark_node_free(document);
+
 
 }

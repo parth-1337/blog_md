@@ -10,17 +10,17 @@ int main(int argc , char *argv[]) {
 
     (void)argc;
 
-    if (argv[1] != NULL && strcmp(argv[1], "--dark") == 0) {
-        gen_file(1);
+    if (argv[2] != NULL && strcmp(argv[2], "--dark") == 0) {
+        gen_file(1 , argv[1]);
     } 
     // defualt is light
     else {
 
-        if (argv[1] != NULL && strcmp(argv[1], "--light") != 0) {
+        if (argv[2] != NULL && strcmp(argv[2], "--light") != 0) {
             printf("Unknown flag '%s'. Defaulting to light theme.\n", argv[1]);
         }
         
-        gen_file(0); 
+        gen_file(0 , argv[1]); 
     }
 
     return 0;
